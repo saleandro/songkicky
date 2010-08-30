@@ -16,6 +16,8 @@ module Songkicky
         per_page  = json_page["perPage"]
         total     = json_page["totalEntries"]
 
+        next unless json_page["results"][thing]
+
         things += json_page["results"][thing]
       end
       things
