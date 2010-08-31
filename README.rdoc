@@ -1,3 +1,5 @@
+= songkicky
+
 Very simple JSON wraper for Songkick's API.
 
 Songkicky.apikey = 'your key'
