@@ -1,4 +1,4 @@
-require 'lib/json_api'
+require 'json_api'
 
 module Songkicky
   class Artist
@@ -12,14 +12,14 @@ module Songkicky
 
     def initialize(mbid)
       @mbid   = mbid
-      @events = nil
+      @upcoming_events = nil
     end
 
     def upcoming_events
-      return @events if @events
+      return @upcoming_events if @upcoming_events
 
       events_hash = all("artists/mbid:#{@mbid}/events.json", 'event')
-      @events = events_hash.map {|hash| Event.new(hash) }
+      @upcoming_events = events_hash.map {|hash| Event.new(hash) }
     end
 
   end

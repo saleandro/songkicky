@@ -1,8 +1,8 @@
 $:.unshift(File.dirname(__FILE__))
 
-require 'lib/artist'
-require 'lib/event'
-require 'lib/metro_area'
+require 'artist'
+require 'event'
+require 'metro_area'
 
 module Songkicky
   class << self

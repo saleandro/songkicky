@@ -1,0 +1,5 @@
+Very simple Ruby wrapper for Songkick's API.
+
+Songkicky.apikey = 'your key'
+artist = Songkicky::Artist.find_by_mbid('8475297d-fb78-4630-8d74-9b87b6bb7cc8')
+puts artist.upcoming_events.map(&:name)
