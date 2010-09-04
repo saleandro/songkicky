@@ -4,9 +4,21 @@ module Songkicky
   class Artist
     include JsonApi
 
+    attr_accessor :name, :mbid
+
     class << self
       def find_by_mbid(mbid)
+        raise Error.new("MusicBrainz id is blank") if mbid.nil? || mbid.strip == ''
+
         Artist.new(mbid)
+      end
+
+      def find_by_name(name)
+        raise Error.new("Name is blank") if name.nil? || name.strip == ''
+
+        a = Artist.new(nil)
+        a.name = name
+        a
       end
     end
 

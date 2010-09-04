@@ -34,7 +34,7 @@ module Songkicky
     rescue OpenURI::HTTPError => e
       case e.message
         when /403/
-          raise "Are you sure you set your Songkicky.apikey correctly? It's set to: '#{Songkicky.apikey}'"
+          raise Songkicky::Error.new("Are you sure you set your Songkicky.apikey correctly? It's set to: '#{Songkicky.apikey}'")
         else
           raise e
       end

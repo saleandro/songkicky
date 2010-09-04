@@ -11,6 +11,8 @@ begin
     gem.homepage = "http://github.com/saleandro/songkicky"
     gem.authors = ["Sabrina Leandro"]
     gem.add_development_dependency "json", ">= 0"
+    gem.files = [".document",  ".gitignore","LICENSE", "Rakefile", "VERSION",'lib/**/*.rb']
+
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
