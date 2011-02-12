@@ -13,7 +13,7 @@ module Songkicky
 
     def initialize(username)
       @username = username
-      @past_events = nil
+      @past_events = @upcoming_events = nil
     end
 
     def past_events
@@ -21,6 +21,13 @@ module Songkicky
 
       events_hash = all("users/#{@username}/gigography.json", 'event')
       @past_events = events_hash.map {|hash| Event.new(hash) }
+    end
+
+    def upcoming_events
+      return @upcoming_events if upcoming_events
+
+      events_hash = all("users/#{@username}/calendar.json", 'event')
+      @upcoming_events = events_hash.map {|hash| Event.new(hash) }
     end
   end
 end

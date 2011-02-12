@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/saleandro/songkicky}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.3.8}
   s.summary = %q{Wrapper for Songkick's API.}
 
   if s.respond_to? :specification_version then
