@@ -26,8 +26,8 @@ module Songkicky
     def upcoming_events
       return @upcoming_events if @upcoming_events
 
-      events_hash = all("users/#{@username}/calendar.json", 'event')
-      @upcoming_events = events_hash.map {|hash| Event.new(hash) }
+      events_hash = all("users/#{@username}/calendar.json?reason=attendance", 'calendarEntry')
+      @upcoming_events = events_hash.map {|hash| Event.new(hash['event']) }
     end
   end
 end

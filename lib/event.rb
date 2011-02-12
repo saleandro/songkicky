@@ -12,7 +12,7 @@ module Songkicky
                   :venue,
                   :lat, :lng,
                   :metro_area,
-                  :headliners,
+                  :artists, :headliners, :supports,
                   :festival,
                   :type
 
@@ -37,9 +37,18 @@ module Songkicky
       @metro_area = MetroArea.new(hash['venue']['metroArea']) if hash['venue']
 
       if hash['performance']
+        @artists = hash['performance'].map {|p| Artist.new(p['artist'])}
+
         headlines = hash['performance'].select {|p| p['billing'] == 'headline'}
-        @headliners = headlines.map {|p| Artist.find_by_name(p['artist']['displayName'])}
+        @headliners = headlines.map {|p| Artist.new(p['artist'])}
+
+        supports = hash['performance'].select {|p| p['billing'] == 'support'}
+        @supports = supports.map {|p| Artist.new(p['artist'])}
       end
+    end
+
+    def festival?
+      !@festival.nil?
     end
 
     def setlist

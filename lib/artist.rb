@@ -4,33 +4,26 @@ module Songkicky
   class Artist
     include JsonApi
 
-    attr_accessor :name, :mbid
+    attr_accessor :name, :mbids
 
     class << self
       def find_by_mbid(mbid)
         raise Error.new("MusicBrainz id is blank") if mbid.nil? || mbid.strip == ''
 
-        Artist.new(mbid)
+        Artist.new({'identifier' => ['mbid' => mbid]})
       end
+     end
 
-      def find_by_name(name)
-        raise Error.new("Name is blank") if name.nil? || name.strip == ''
-
-        a = Artist.new(nil)
-        a.name = name
-        a
-      end
-    end
-
-    def initialize(mbid)
-      @mbid   = mbid
+    def initialize(hash)
+      @mbids  = (hash['identifier']||[]).map {|id| id['mbid']}
+      @name   = hash['displayName']
       @upcoming_events = nil
     end
 
     def upcoming_events
       return @upcoming_events if @upcoming_events
 
-      events_hash = all("artists/mbid:#{@mbid}/events.json", 'event')
+      events_hash = all("artists/mbid:#{@mbids.first}/events.json", 'event')
       @upcoming_events = events_hash.map {|hash| Event.new(hash) }
     end
 
